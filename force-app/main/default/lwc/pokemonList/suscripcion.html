@@ -1,0 +1,39 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 11-30-2022
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+<template>
+    <fieldset class="slds-form-element">
+        <legend class="slds-form-element__legend slds-form-element__label"></legend>
+			<span style="color:#00396b">{label}</span>
+		<div class="slds-form-element__control slds-text-align_center slds-p-around_large slds-theme_default  slds-grid_vertical-align-center">
+            
+            <template for:each={options} for:item="option">
+                <div key={option.value}  onclick={handleClick} class="slds-visual-picker slds-visual-picker_large ">
+                    <input   type="radio" id={option.id} value={option.value} name="options"/>
+                    <label for={option.id}>
+                        <span class="slds-align_absolute-center ">
+                            <!-- <span class="slds-is-selected"> -->
+                                <span class="slds-icon_container">
+                                    <img src={option.image}/>
+                                </span>
+                            <!-- </span>  -->
+                            <!-- <span class="slds-is-not-selected">
+                                <span class="slds-icon_container">
+                                    <img src={option.image}/>
+                                </span>
+                            </span> -->
+                        </span>
+                        <span class="slds-visual-picker__body">
+                            <span class="slds-text-title slds-text-title_bold"><strong class="labelweight" >{option.label}</strong></span>
+                        </span>
+                    </label>
+                </div>
+            </template>
+            
+        </div>
+    </fieldset>
+</template>

@@ -1,0 +1,56 @@
+<template>
+    <div class="container">
+        <div>
+          <div class="poke-gen-title" style={getColorGen}>
+            <div class="slds-col slds-size_12-of-12 slds-text-align_center">
+              <h2 class="title-pokemon">{getTitle}</h2>
+            </div>
+          </div>
+        </div>
+    
+
+        <lightning-card  class="poke-card " style={getStyleCard}>
+            
+            <div class="slds-grid slds-gutters distanciaCard" >
+
+                <div class="slds-col slds-size_4-of-12 distanciaImagen">
+                  <div>
+                    <img src={pokemon.Foto_URL__c} alt="Imagen de pokemon" onclick={handleOpenRecordClick} class="poke-image" style={getStyleCard}/>
+                  </div>
+                </div>
+                <div class="slds-col slds-size_8-of-12 poke-datos" >
+                  <div class="slds-media__body" >
+
+                    <h2 class="slds-card__header-title" aria-level="2" style="margin-top: -22px; margin-left: -70px; ;">
+                      <span class="slds-text-heading_small slds-truncate" style="font-size:25px;">{pokemon.Name}</span>
+                    </h2>
+                    <p class="slds-text-align_left poke-texto" >Generación:<span style="font-weight:bold;">{textoGeneracion}</span></p>
+                    <p class="slds-text-align_left poke-texto"  >Altura:<span style="font-weight:bold;"> {pokemon.Altura__c}</span></p>
+                    <p class="slds-text-align_left poke-texto" >Peso:<span style="font-weight:bold;"> {pokemon.Peso__c}</span> </p>
+                  </div>
+                </div>
+        
+            </div>
+            <div class="slds-grid slds-gutters" >
+                <div class="slds-col slds-size_2-of-12"></div>
+                <div class="slds-col slds-size_8-of-12 d-flex">
+                  <template for:each={getTipo} for:item="tipo">
+
+
+                  <button  key={tipo.type}  class="slds-button slds-button_stretch poke-button" style={getStyleCard}>
+                    <img class="imaDesign" src={tipo.img}>  
+                    <p class="slds-text-align_center slds-m-left_x-small slds-m-right_x-small">{tipo.type}</p>
+                  </button>
+                </template>
+                </div>
+                <div class="slds-col slds-size_2-of-12"></div>
+        
+              </div>
+        
+
+        </lightning-card>
+
+    
+    </div>
+
+</template>

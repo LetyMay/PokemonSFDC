@@ -1,0 +1,94 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 12-27-2022
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+<template>
+	<div class="fondo">
+		<div class="slds-align_absolute-center" id="Portada">
+			<img src={tituloImgUrl}/>
+		</div>
+		<div class="slds-card__body_inner">
+			<lightning-layout vertical-align="center"   class="list" multiple-rows="true" pull-to-boundary="small">
+				<!-- Combobox Tipo -->
+				<lightning-layout-item  size="3" class="slds-var-p-around_x-small">
+					<h4 class="tituloPokemon">Tipo</h4>
+					<lightning-combobox 
+							name="tipo"
+							value={tipoPok}
+							placeholder="Todos"
+							options={opcionesTipo}
+							onchange={handleChangeTipo} >
+					</lightning-combobox>
+				</lightning-layout-item>
+				<!-- Combobox Generación -->
+				<lightning-layout-item  size="3" class="slds-var-p-around_x-small">
+					<h4 class="tituloPokemon">Generación</h4>
+					<lightning-combobox
+						name="generacion"
+						value={generacionPok}
+						placeholder="Todos"
+						options={opcionesGeneracion}
+						onchange={handleChangeGeneracion} >
+					</lightning-combobox>
+				</lightning-layout-item>
+				<!-- Input Nombre -->
+				<lightning-layout-item   style="margin-top: 10px;"  size="3" class="slds-var-p-around_x-small">
+					<h4 class="tituloPokemon" style="margin-bottom: 0px" >Nombre</h4>
+					<lightning-input   type="search"
+						variant="label-hidden"
+						class="slds-var-m-bottom_small"
+						placeholder="Buscar por pokemon"
+						onchange={handleSearchTermChange}
+						value={searchTerm}>
+					</lightning-input>
+				</lightning-layout-item>
+				<!-- Layout Cantidad -->
+				<lightning-layout-item  size="3" class="slds-var-p-around_x-small">
+					<div class="slds-grid slds-gutters">
+						<!-- Icono dinamico -->
+						<div class="slds-col slds-size_2-of-12 espacioDer">
+							<img onclick={borrarFiltrado} src={pokebolapqUrl}/>
+						</div>
+						<!-- Texto cantidad -->
+						<div class="slds-col slds-size_10-of-12 espacioIzq" >
+							<label class="tituloPokemon" >Total de pokemones: {totalResults}</label>
+						</div>
+					</div>
+				</lightning-layout-item>
+			</lightning-layout>
+			<!-- Inicia pokemonList -->
+			<template if:true={pokemones}>
+				<lightning-layout multiple-rows="true" pull-to-boundary="small">
+					<template for:each={pokemones} for:item="pokemon">
+						<lightning-layout-item key={pokemon.id} size="10" flexibility="auto" small-device-size="4"
+						medium-device-size="2" large-device-size="2" class="slds-var-p-around_x-small">
+							<!-- inicio pokemonTile -->
+							<c-pokemon-tile pokemon={pokemon} onpokemonview={handlePokemonView}></c-pokemon-tile>
+							<!-- final pokemonTile -->
+						</lightning-layout-item>
+					</template>
+				</lightning-layout>
+				<!-- No hay item en pokemonList -->
+				<template if:false={hasResults}>
+					<div class="slds-align_absolute-center slds-var-m-vertical_small list tituloPokemon">
+						No se encontraron resultados de la búsqueda.
+					</div>
+					<div class="slds-align_absolute-center imgError" >
+						<img src={imgErrorUrl}/>
+					</div>
+				</template>
+			</template>
+			<!-- Termina  pokemonList -->
+			<!-- Se carga la template si hay un error -->
+			<template if:true={error}>
+				<div class="slds-text-color_error list tituloPokemon">
+					A ocurrido un error mientras se cargaba la lista de pokemones
+				</div>
+				
+			</template>
+		</div>
+	</div>
+</template>
